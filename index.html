@@ -1,136 +1,337 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gmap – Services</title>
-
-  <!-- GOOGLE FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- ICONS -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gmap Services</title>
+  <meta name="description" content="Professional Google Maps API integration, App development, SMS APIs and custom APIs. Secure, fast and affordable." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <style>
+    /* ====== VARIABLES ====== */
+    :root{
+      --bg:#0f172a; /* dark navy */
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#4f46e5; /* indigo-600 */
+      --accent-2:#06b6d4; /* cyan */
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --maxw:1200px;
+      --container-pad:24px;
+    }
 
+    /* ====== RESET ====== */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: linear-gradient(180deg,#071023 0%, #07132a 60%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:80px;
+    }
+
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 var(--container-pad)}
+
+    /* ====== NAV ====== */
+    nav.site{display:flex;align-items:center;justify-content:space-between;padding:18px 0;background:transparent;position:sticky;top:0;z-index:60}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700}
+    .brand .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(79,70,229,0.18)}
+    .brand .logo i{font-size:18px}
+    .brand h1{font-size:16px;letter-spacing:0.2px}
+
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px;transition:all .18s}
+    .navlinks a:hover{color:#fff;background:rgba(255,255,255,0.03);transform:translateY(-3px)}
+    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 16px;border-radius:12px;color:white;text-decoration:none;font-weight:700;box-shadow:0 8px 30px rgba(79,70,229,0.18)}
+
+    /* ====== HERO ====== */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:48px 0}
+    .hero-left h2{font-size:36px;line-height:1.05;margin-bottom:14px}
+    .hero-left p{color:var(--muted);margin-bottom:24px;font-size:15px}
+
+    .features{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .chip{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:600;font-size:13px}
+
+    /* HERO CARD */
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);padding:22px;border-radius:16px;backdrop-filter: blur(6px);box-shadow:0 8px 40px rgba(2,6,23,0.6)}
+    .stat{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .stat strong{font-size:20px}
+    .stat small{color:var(--muted)}
+
+    /* ====== GRID SECTIONS ====== */
+    .section{margin-top:36px;padding:36px 0}
+    .title{font-size:20px;margin-bottom:14px}
+
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .22s, box-shadow .22s}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 50px rgba(2,6,23,0.55)}
+    .card h3{font-size:16px;margin-bottom:8px}
+    .card p{color:var(--muted);font-size:14px}
+
+    /* ====== PRICING ====== */
+    .pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .price{padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent)}
+    .price h4{font-size:16px}
+    .price .amount{font-size:24px;font-weight:800;margin:12px 0}
+    .price .cta{display:inline-block;margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:700}
+
+    /* ====== MAP & CONTACT ====== */
+    .map-wrap{height:420px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+    .contact-card{padding:20px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03)}
+    .contact-card label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    .contact-card input,.contact-card textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;margin-bottom:10px}
+    .contact-card button{padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:white;font-weight:700}
+
+    /* ====== POLICIES LIST ====== */
+    .policies{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .policy{padding:18px;border-radius:12px;background:var(--glass);border:1px solid rgba(255,255,255,0.03)}
+    .policy h4{margin-bottom:8px}
+    .policy p{color:var(--muted);font-size:13px}
+
+    /* ====== FOOTER ====== */
+    footer{margin-top:36px;padding:26px 0;text-align:center;color:var(--muted);font-size:13px}
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:18px}
+      .hero-card{order:2}
+    }
+
+    @media (max-width:640px){
+      .navlinks{display:none}
+      .brand h1{font-size:14px}
+      .hero-left h2{font-size:26px}
+      .map-wrap{height:280px}
+      .policies{grid-template-columns:1fr}
+    }
+
+    /* ====== SUBTLE MOTIONS ====== */
+    .fade-up{opacity:0;transform:translateY(8px);animation:fadeUp .6s ease forwards}
+    @keyframes fadeUp{to{opacity:1;transform:none}}
+
+    .glow{box-shadow:0 6px 40px rgba(99,102,241,0.12)}
+  </style>
+</head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar container">
-    <div class="logo"><i class="fa-solid fa-location-dot"></i> Gmap</div>
-    <ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="#contact" class="btn-primary">Get Started</a>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero fade-in">
-    <div class="hero-content container">
-      <h1>We Provide Services For Better Working</h1>
-      <p>A minimal Efforts to get your work done.</p>
-
-      <div class="hero-buttons">
-        <a href="#services" class="btn-primary">Our Services</a>
-        <a href="#contact" class="btn-outline">Contact Us</a>
+  <div class="container">
+    <nav class="site">
+      <div class="brand"><div class="logo"><i class="fa-solid fa-location-dot"></i></div><h1>Gmap Services</h1></div>
+      <div class="navlinks">
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a href="#policies">Policies</a>
       </div>
-    </div>
-  </section>
+  
+    </nav>
 
-  <!-- SERVICES -->
-  <section id="services" class="section container fade-in">
-    <h2 class="title">Services</h2>
-    <div class="grid">
+    <header class="hero">
+      <div class="hero-left">
+        <h2 class="fade-up" style="animation-delay:.1s">Fast, secure & scalable Maps + App solutions</h2>
+        <p class="fade-up" style="animation-delay:.18s">We build production-ready Google Maps integrations, mobile apps and APIs — hosted securely and optimized for performance.</p>
 
-      <div class="card">
-        <i class="fa-solid fa-pen-nib icon"></i>
-        <h3>UI Design</h3>
-        <p>Designing beautiful and meaningful user interfaces.</p>
+        <div class="features fade-up" style="animation-delay:.26s">
+          <div class="chip">Responsive</div>
+          <div class="chip">SSL-ready</div>
+          <div class="chip">Compliance-friendly</div>
+          <div class="chip">24/7 Support</div>
+        </div>
+
+        <div style="margin-top:22px;display:flex;gap:12px;align-items:center">
+          <a href="#pricing" class="btn">Start from ₹799</a>
+          <a class="chip" href="#contact" style="text-decoration:none">Book a call</a>
+        </div>
+
       </div>
 
-      <div class="card">
-        <i class="fa-solid fa-code icon"></i>
-        <h3>Frontend Dev</h3>
-        <p>Responsive, scalable and modern frontend applications.</p>
+      <aside class="hero-card glow">
+        <div class="stat">
+          <div style="flex:1">
+            <strong>Working demos</strong>
+            <div style="color:var(--muted);font-size:13px">Map embed, route calc, marker clustering</div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div style="flex:1">
+            <strong>Friendly Pricing</strong>
+            <div style="color:var(--muted);font-size:13px">One-time setup or monthly plans</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          
+        </div>
+      </aside>
+    </header>
+
+    <!-- SERVICES -->
+    <section id="services" class="section">
+      <h3 class="title">Services</h3>
+      <div class="cards">
+        <article class="card fade-up" style="animation-delay:.08s">
+          <h3><i class="fa-solid fa-map-location-dot"></i> Google Maps Integration</h3>
+          <p>Full Maps JS API integration, geocoding, directions, distance matrix, custom markers and performance optimizations.</p>
+        </article>
+
+        <article class="card fade-up" style="animation-delay:.12s">
+          <h3><i class="fa-solid fa-mobile-screen-button"></i> Mobile App Development</h3>
+          <p>Flutter & native apps with Maps, push notifications and secure backend integration.</p>
+        </article>
+
+        <article class="card fade-up" style="animation-delay:.16s">
+          <h3><i class="fa-solid fa-comment-sms"></i> SMS & Notification APIs</h3>
+          <p>OTP, transactional alerts and bulk messaging with delivery tracking.</p>
+        </article>
+
+        <article class="card fade-up" style="animation-delay:.2s">
+          <h3><i class="fa-solid fa-code"></i> Custom APIs & Backend</h3>
+          <p>Secure REST APIs, scalable architecture and documentation for your team.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="section">
+      <h3 class="title">Pricing (starting)</h3>
+      <div class="pricing">
+        <div class="price fade-up" style="animation-delay:.08s">
+          <h4>Maps Integration</h4>
+          <div class="amount">₹1,499</div>
+          <div>One-time setup, includes testing and 7 days support</div>
+          
+        </div>
+
+        <div class="price fade-up" style="animation-delay:.12s">
+          <h4>App Development</h4>
+          <div class="amount">₹9,999</div>
+          <div>End-to-end Flutter app — estimate varies with scope</div>
+          
+        </div>
+
+        <div class="price fade-up" style="animation-delay:.16s">
+          <h4>SMS & Webhooks</h4>
+          <div class="amount">₹799</div>
+          <div>OTP & notification setup</div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+   <section id="about" class="section">
+<h3 class="title">About Us</h3>
+<p style="color:var(--muted);max-width:760px">Gmap Services is a dedicated technology studio specializing in maps and location-based solutions. We combine deep expertise in Google Maps Platform, mobile development, and backend engineering to deliver products that are secure, scalable and compliant with regional regulations. Our team follows industry best practices — secure-by-design architecture, performance profiling, automated testing, and clear documentation — so that every delivery can be confidently used in production by startups and enterprise clients alike.
+<br><br>
+We work with product teams to understand real-world requirements and translate them into robust implementations: whether you need low-latency routing for logistics, precise geofencing for safety-critical apps, or cost-optimized map usage for scale. Our services include full lifecycle support — from prototyping and UX-driven integration to deployment, monitoring and post-launch maintenance.</p>
+</section>
+
+    <!-- POLICIES -->
+    <section id="policies" class="section">
+      <h3 class="title">Policies</h3>
+      <div class="policies">
+        <div class="policy fade-up" style="animation-delay:.08s">
+          <h4>Terms & Conditions</h4>
+          <p>By accessing our services, you agree to provide accurate information and follow all applicable regulations. Service delivery timelines depend on scope. Misuse of APIs or illegal activities are strictly prohibited. Payments once made are bound by project milestones.</p>
+        </div>
+
+        <div class="policy fade-up" style="animation-delay:.12s">
+          <h4>Privacy Policy</h4>
+          <p>We only collect your name, email, and project details strictly for communication and service delivery. We do not sell, trade, or share your personal information. All data is stored securely and deleted upon request.</p>
+        </div>
+
+        <div class="policy fade-up" style="animation-delay:.16s">
+          <h4>Refund Policy</h4>
+          <p>Refunds are applicable only if the service is not delivered or fails to operate as described. For milestone projects, refunds are processed only for yet-undelivered parts of the work. No refunds for delivered code or completed integrations.</p>
+        </div>
+
+        <div class="policy fade-up" style="animation-delay:.2s">
+          <h4>Seller & Contact Information</h4>
+          <p><strong>Gmap Services</strong><br>Mayur Vihar, New Delhi, India<br>Phone: +91 8292793924<br>Email: obv.saam@gmail.com</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP + CONTACT -->
+    <section class="section" style="display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start">
+      <div>
+        <h3 class="title">Our Location (demo)</h3>
+        <div class="map-wrap fade-up" style="animation-delay:.08s">
+          <!-- Replace YOUR_GOOGLE_MAPS_API_KEY with real key. This embed uses Google Maps Embed API. -->
+      <iframe title="Gmap location" width="100%" height="100%" style="border:0" loading="lazy" allowfullscreen
+    src="https://www.google.com/maps/embed/v1/place?q=Delhi%2C%20India&key=AIzaSyCNI0FY90sbNR1lrnlvnCnbYL0MplrnPdg"></iframe>
+        </div>
       </div>
 
-      <div class="card">
-        <i class="fa-solid fa-user-tie icon"></i>
-        <h3>Consulting</h3>
-        <p>Tech, architecture & API consulting for modern businesses.</p>
-      </div>
+      <aside>
+        <div class="contact-card fade-up" style="animation-delay:.12s">
+          <h4>Contact Us</h4>
+          <p style="color:var(--muted);margin-bottom:12px">Send a message or use the phone/email listed below for faster response.</p>
 
-      <div class="card">
-        <i class="fa-solid fa-map-location-dot icon"></i>
-        <h3>Google Maps API</h3>
-        <p>Advanced Google Map API integration & location services.</p>
-      </div>
+          <p style="font-weight:700">Address</p>
+          <p style="color:var(--muted);margin-bottom:6px">Mayur Vihar, New Delhi, India</p>
 
-      <div class="card">
-        <i class="fa-solid fa-comment-sms icon"></i>
-        <h3>SMS API</h3>
-        <p>OTPs, notifications, alerts with high-speed delivery.</p>
-      </div>
+          <p style="font-weight:700">Phone</p>
+          <p style="color:var(--muted);margin-bottom:6px">+91 82927 93924</p>
 
-      <div class="card">
-        <i class="fa-solid fa-mobile-screen-button icon"></i>
-        <h3>App Development</h3>
-        <p>High-quality apps built for performance & reliability.</p>
-      </div>
+          <p style="font-weight:700">Email</p>
+          <p style="color:var(--muted);margin-bottom:12px">obv.saam@gmail.com</p>
 
-    </div>
-  </section>
+          <form action="backend/contact.php" method="POST">
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Your name" required>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@company.com" required>
+            <label for="msg">Message</label>
+            <textarea id="msg" name="message" rows="4" placeholder="How can we help?" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </aside>
+    </section>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="section container fade-in">
-    <h2 class="title">Testimonials</h2>
-    <div class="grid">
+    <footer>
+      <div style="max-width:var(--maxw);margin:0 auto;padding:16px">© 2025 Gmap Services • All rights reserved • <a href="#policies" style="color:var(--accent);text-decoration:none">View policies</a></div>
+    </footer>
 
-      <div class="card small">
-        <p>"Great work — UI shipped fast and looked excellent."</p>
-        <h4>Rahul</h4>
-      </div>
+  </div>
 
-      <div class="card small">
-        <p>"Their team helped us iterate quickly and confidently."</p>
-        <h4>Samar</h4>
-      </div>
+  <script>
+    // Enhance small fade-up elements after DOM loaded
+    document.addEventListener('DOMContentLoaded',function(){
+      document.querySelectorAll('.fade-up').forEach(function(el,i){
+        el.style.animationDelay = (i*80)+200 + 'ms';
+      });
+    });
+  </script>
 
-      <div class="card small">
-        <p>"Well structured code and clear components."</p>
-        <h4>Priya</h4>
-      </div>
 
-      <div class="card small">
-        <p>"APIs work fast and flawlessly."</p>
-        <h4>Kayra</h4>
-      </div>
+<!-- FIXED SMOOTH SCROLL WITHOUT BLOCKING CLICKS -->
+<script>
+// modern smooth scrolling with correct offset for sticky navbar
+const navHeight = document.querySelector('nav.site').offsetHeight;
 
-    </div>
-  </section>
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const targetId = link.getAttribute('href');
+    if (targetId === '#' || targetId === '' || !document.querySelector(targetId)) return;
 
-  <!-- CONTACT -->
-  <section id="contact" class="contact-section fade-in">
-    <div class="contact-box">
-      <h2>Contact Us</h2>
-      <p>Feel free to reach out! We reply quickly.</p>
+    e.preventDefault();
+    const section = document.querySelector(targetId);
 
-      <form>
-        <input type="text" placeholder="Your Name" required />
-        <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="Your Message"></textarea>
-        <button class="btn-primary full">Send Message</button>
-      </form>
-    </div>
-  </section>
+    const yOffset = - (navHeight + 12); // header margin
+    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2025 Gmap Services. All Rights Reserved.</p>
-  </footer>
-
+    window.scrollTo({top: y, behavior: 'smooth'});
+  });
+});
+</script>
 </body>
 </html>
