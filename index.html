@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>EMI Admin Pro | Enterprise Dashboard</title>
+    <title>EMI Admin</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
@@ -210,7 +210,7 @@
     <div class="container">
         
         <div class="header-section">
-            <h1 class="header-title">Dashboard Overview</h1>
+            <h1 class="header-title">Dashboard</h1>
             <p class="header-subtitle">Live Device Management System</p>
         </div>
 
@@ -224,7 +224,7 @@
                 <span class="stat-value" id="lockedCount" style="color:#ef4444;">0</span>
             </div>
             <div class="stat-card">
-                <span class="stat-label"><span class="indicator" style="background:#22c55e;"></span>Active</span>
+                <span class="stat-label"><span class="indicator" style="background:#22c55e;"></span>Non Restricted</span>
                 <span class="stat-value" id="unlockedCount" style="color:#22c55e;">0</span>
             </div>
         </div>
@@ -232,12 +232,12 @@
         <div class="controls-wrapper">
             <div class="search-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" onkeyup="applyFilters()" placeholder="Search ID / Name / Phone">
+                <input type="text" id="searchInput" onkeyup="applyFilters()" placeholder="Search ID">
             </div>
             <div class="filter-group">
                 <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
                 <button class="filter-btn" onclick="setFilter('locked', this)">Restricted</button>
-                <button class="filter-btn" onclick="setFilter('active', this)">Active</button>
+                <button class="filter-btn" onclick="setFilter('active', this)">NoN Restricted</button>
             </div>
         </div>
 
@@ -465,3 +465,4 @@
     </script>
 </body>
 </html>
+
