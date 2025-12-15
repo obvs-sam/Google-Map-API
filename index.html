@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMI Admin Pro | Ultimate Dashboard</title>
+    <title>EMI Admin Pro | Restriction Manager</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -17,6 +17,7 @@
             --accent: #0ea5e9;  /* Sky Blue */
             --success: #10b981; /* Emerald */
             --danger: #ef4444;  /* Red */
+            --info: #3b82f6;    /* Blue for Info */
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
         }
@@ -36,10 +37,7 @@
         }
 
         /* --- 2. CONTAINER & HEADER --- */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
 
         .header-title {
             text-align: center;
@@ -64,7 +62,6 @@
         .glass-card {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 30px;
@@ -73,235 +70,104 @@
             position: relative;
             overflow: hidden;
         }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            opacity: 0.7;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            border-color: rgba(255,255,255,0.2);
-        }
-
-        .glass-card h3 {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 0;
-        }
-
-        .glass-card p {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin: 10px 0 0;
-            line-height: 1;
-        }
-
+        .glass-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .glass-card h3 { color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; margin: 0; }
+        .glass-card p { font-size: 3.5rem; font-weight: 700; margin: 10px 0 0; line-height: 1; }
         .txt-neon-blue { text-shadow: 0 0 20px rgba(99, 102, 241, 0.5); color: #818cf8; }
         .txt-neon-red { text-shadow: 0 0 20px rgba(239, 68, 68, 0.5); color: #f87171; }
         .txt-neon-green { text-shadow: 0 0 20px rgba(16, 185, 129, 0.5); color: #34d399; }
 
-        /* --- 4. CONTROLS (SEARCH & FILTER) --- */
+        /* --- 4. CONTROLS --- */
         .controls-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            background: rgba(30, 41, 59, 0.4);
-            padding: 15px;
-            border-radius: 16px;
-            border: 1px solid var(--glass-border);
+            display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center;
+            margin-bottom: 25px; background: rgba(30, 41, 59, 0.4); padding: 15px;
+            border-radius: 16px; border: 1px solid var(--glass-border);
         }
-
-        .search-box {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-        }
-
+        .search-box { flex: 1; min-width: 300px; position: relative; }
         #searchInput {
-            width: 100%;
-            padding: 16px 20px;
-            padding-left: 50px; /* Space for icon */
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(15, 23, 42, 0.6);
-            color: white;
-            font-size: 1rem;
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.3s;
+            width: 100%; padding: 16px 20px; padding-left: 50px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(15, 23, 42, 0.6);
+            color: white; font-size: 1rem; font-family: 'Outfit', sans-serif;
         }
-        
-        #searchInput::placeholder { color: #64748b; }
-        #searchInput:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
-        }
-
-        /* Search Icon Pseudo-element */
-        .search-box::after {
-            content: '🔍';
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0.5;
-            font-size: 18px;
-        }
-
-        .filter-group {
-            display: flex;
-            background: rgba(15, 23, 42, 0.6);
-            padding: 5px;
-            border-radius: 12px;
-            gap: 5px;
-        }
-
-        .filter-btn {
-            padding: 10px 24px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            border-radius: 8px;
-            font-weight: 600;
-            color: var(--text-muted);
-            font-family: 'Outfit', sans-serif;
-            transition: all 0.3s ease;
-        }
-
+        .search-box::after { content: '🔍'; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); opacity: 0.5; }
+        .filter-group { display: flex; background: rgba(15, 23, 42, 0.6); padding: 5px; border-radius: 12px; gap: 5px; }
+        .filter-btn { padding: 10px 24px; border: none; background: transparent; cursor: pointer; border-radius: 8px; font-weight: 600; color: var(--text-muted); transition: all 0.3s; }
         .filter-btn:hover { color: white; }
+        .filter-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
 
-        .filter-btn.active {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-        }
-
-        /* --- 5. DATA TABLE (THE HERO) --- */
+        /* --- 5. DATA TABLE --- */
         .table-container {
-            background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: var(--card-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border);
+            border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
+        table { width: 100%; border-collapse: collapse; white-space: nowrap; }
+        thead { background: rgba(15, 23, 42, 0.8); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { padding: 20px 30px; text-align: left; font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
+        td { padding: 20px 30px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 1rem; color: var(--text-main); }
+        tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            white-space: nowrap;
-        }
-
-        thead {
-            background: rgba(15, 23, 42, 0.8);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        th {
-            padding: 20px 30px;
-            text-align: left;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        td {
-            padding: 20px 30px;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-            font-size: 1rem;
-            color: var(--text-main);
-        }
-
-        tbody tr {
-            transition: background 0.2s;
-            animation: fadeIn 0.5s ease forwards;
-        }
-
-        tbody tr:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        /* --- 6. BADGES & ACTIONS --- */
-        .badge {
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .badge-locked {
-            background: rgba(239, 68, 68, 0.15);
-            color: #fca5a5;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .badge-open {
-            background: rgba(16, 185, 129, 0.15);
-            color: #6ee7b7;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        /* Pulsing Dot */
-        .dot {
-            height: 8px; width: 8px; border-radius: 50%;
-        }
+        /* --- 6. BUTTONS & BADGES --- */
+        .badge { padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+        .badge-locked { background: rgba(239, 68, 68, 0.15); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-open { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+        .dot { height: 8px; width: 8px; border-radius: 50%; }
         .badge-open .dot { background: #34d399; box-shadow: 0 0 8px #34d399; }
         .badge-locked .dot { background: #f87171; box-shadow: 0 0 8px #f87171; }
 
         button.btn {
-            border: none;
-            padding: 10px 24px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            border: none; padding: 10px 18px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
+            display: inline-flex; align-items: center; gap: 6px; margin-right: 5px; transition: all 0.2s;
+        }
+        .btn-lock { background: #ef4444; color: white; }
+        .btn-unlock { background: #10b981; color: white; }
+        .btn-info { background: #3b82f6; color: white; box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); }
+        .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+        /* --- 7. MODAL (POPUP) STYLES --- */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+            z-index: 1000; justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #1e293b; width: 90%; max-width: 550px;
+            border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.2); overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+        .modal-header {
+            background: linear-gradient(90deg, #6366f1, #0ea5e9);
+            padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h3 { margin: 0; font-size: 1.2rem; }
+        .close-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .modal-body { padding: 25px; max-height: 70vh; overflow-y: auto; }
+        
+        /* Modal Data Rows */
+        .data-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .data-label { color: #94a3b8; font-size: 0.9rem; }
+        .data-value { color: #f8fafc; font-weight: 600; text-align: right; }
+        
+        /* Section Titles in Modal */
+        .section-title {
+            color: var(--primary); font-size: 0.95rem; font-weight: 700;
+            margin: 25px 0 10px 0; border-left: 3px solid var(--accent);
+            padding-left: 10px; text-transform: uppercase; letter-spacing: 0.5px;
         }
 
-        .btn-lock {
-            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        /* EMI Table Styles */
+        .emi-table-wrapper {
+            margin-top: 10px; background: rgba(0,0,0,0.2); border-radius: 12px;
+            padding: 10px; max-height: 200px; overflow-y: auto;
         }
-        .btn-lock:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.5);
-        }
+        .mini-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .mini-table th { text-align: left; color: #94a3b8; padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .mini-table td { padding: 8px; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .status-paid { color: #4ade80; font-weight: bold; background: rgba(74, 222, 128, 0.1); padding: 2px 8px; border-radius: 4px; }
+        .status-unpaid { color: #f87171; font-weight: bold; background: rgba(248, 113, 113, 0.1); padding: 2px 8px; border-radius: 4px; }
 
-        .btn-unlock {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-        .btn-unlock:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
     </style>
 </head>
@@ -313,27 +179,26 @@
         <div class="stats-grid">
             <div class="glass-card">
                 <h3>Total Users</h3>
-                <p id="totalCount" class="txt-neon-blue">Loading...</p>
+                <p id="totalCount" class="txt-neon-blue">...</p>
             </div>
             <div class="glass-card">
-                <h3>🚫 Locked Devices</h3>
+                <h3>🛡️ Activate-Restriction</h3>
                 <p id="lockedCount" class="txt-neon-red">0</p>
             </div>
             <div class="glass-card">
-                <h3>✅ Active Devices</h3>
+                <h3>🔓 Deactivate-Restriction</h3>
                 <p id="unlockedCount" class="txt-neon-green">0</p>
             </div>
         </div>
 
         <div class="controls-wrapper">
             <div class="search-box">
-                <input type="text" id="searchInput" onkeyup="applyFilters()" placeholder="Search Device ID or Name...">
+                <input type="text" id="searchInput" onkeyup="applyFilters()" placeholder="Search Device ID...">
             </div>
-            
             <div class="filter-group">
-                <button class="filter-btn active" onclick="setFilter('all', this)">All Devices</button>
-                <button class="filter-btn" onclick="setFilter('locked', this)">Locked 🔒</button>
-                <button class="filter-btn" onclick="setFilter('active', this)">Active ✅</button>
+                <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+                <button class="filter-btn" onclick="setFilter('locked', this)">🛡️ Activate-Restriction</button>
+                <button class="filter-btn" onclick="setFilter('active', this)">🔓 Deactivate-Restriction</button>
             </div>
         </div>
 
@@ -341,15 +206,26 @@
             <table id="deviceTable">
                 <thead>
                     <tr>
-                        <th width="40%">Device ID / User</th>
-                        <th width="30%">Status</th>
-                        <th width="30%">Action</th>
+                        <th width="35%">Device ID</th>
+                        <th width="25%">Status</th>
+                        <th width="40%">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="userTableBody">
-                    <tr><td colspan="3" style="text-align:center; padding: 40px; color: var(--text-muted);">⚡ Connecting to Neural Network...</td></tr>
+                    <tr><td colspan="3" style="text-align:center; padding: 40px;">⚡ Connecting to Database...</td></tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Device Details</h3>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBodyContent">
+                </div>
         </div>
     </div>
 
@@ -357,7 +233,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        // CONFIG (NO CHANGE)
+        // CONFIGURATION
         const firebaseConfig = {
             apiKey: "AIzaSyC3_9rThlE6buWnVV7R292DYd9B0wgLJBI",
             authDomain: "divyanshglobal-ecommerce.firebaseapp.com",
@@ -375,118 +251,206 @@
 
         window.currentStatusFilter = 'all';
 
-        // FILTER BUTTON CLICK
+        // --- 1. COMPLEX API FETCH & PARSING LOGIC ---
+        window.fetchUserInfo = async function(deviceId) {
+            const modal = document.getElementById('infoModal');
+            const content = document.getElementById('modalBodyContent');
+            const title = document.getElementById('modalTitle');
+
+            // Show Loading
+            modal.style.display = 'flex';
+            title.innerText = `ID: ${deviceId}`;
+            content.innerHTML = `<div style="text-align:center; padding:40px; color:#94a3b8;">
+                                    <div style="font-size:2.5rem; animation:pulse 1s infinite;">📡</div>
+                                    <br>Fetching Secure Data...
+                                 </div>`;
+
+            try {
+                // API HIT
+                const apiUrl = `https://login.emitrackon.in/api/get/hidden_app/send-device-info/${deviceId}`;
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) throw new Error("Server Error");
+
+                const rawData = await response.json();
+                
+                // DATA VALIDATION
+                if (!rawData || !rawData.customer) {
+                    throw new Error("No Customer Data Found");
+                }
+
+                const cust = rawData.customer; 
+                const retailer = cust.retailer || {};
+                const bank = cust.bank || {};
+                
+                // PARSE DEVICE DETAIL STRING
+                let deviceSpecs = {};
+                try {
+                    deviceSpecs = JSON.parse(cust.device_detail || '{}');
+                } catch (e) { console.log("Device detail parse error"); }
+
+                // BUILD HTML
+                let html = `
+                    <div class="section-title">👤 Customer Details</div>
+                    <div class="data-row"><span class="data-label">Name</span> <span class="data-value">${cust.name || 'N/A'}</span></div>
+                    <div class="data-row"><span class="data-label">Phone</span> <span class="data-value">${cust.phone || 'N/A'}</span></div>
+                    <div class="data-row"><span class="data-label">City/State</span> <span class="data-value">${retailer.state || 'N/A'}</span></div>
+
+                    <div class="section-title">📱 Device Specs</div>
+                    <div class="data-row"><span class="data-label">Model</span> <span class="data-value">${deviceSpecs.Model || cust.model || 'N/A'}</span></div>
+                    <div class="data-row"><span class="data-label">Brand</span> <span class="data-value">${deviceSpecs.Brand || 'N/A'}</span></div>
+                    <div class="data-row"><span class="data-label">Android Ver</span> <span class="data-value">${deviceSpecs["Version Code"] || 'N/A'}</span></div>
+                    <div class="data-row"><span class="data-label">IMEI</span> <span class="data-value">${cust.imei1 || 'N/A'}</span></div>
+
+                    <div class="section-title">💰 Finance & Retailer</div>
+                    <div class="data-row"><span class="data-label">Bank</span> <span class="data-value">${bank.name || 'N/A'}</span></div>
+                    <div class="data-row"><span class="data-label">Retailer</span> <span class="data-value">${retailer.name || 'N/A'}</span></div>
+                    <div class="data-row"><span class="data-label">EMI Amount</span> <span class="data-value">₹${cust.emi_amount || 0}</span></div>
+                    
+                    <div class="section-title">📅 EMI Schedule</div>
+                    <div class="emi-table-wrapper">
+                        <table class="mini-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                // LOOP THROUGH EMI ARRAY
+                if (cust.emi && Array.isArray(cust.emi)) {
+                    cust.emi.forEach(item => {
+                        const statusClass = (item.status === 'Paid') ? 'status-paid' : 'status-unpaid';
+                        html += `
+                            <tr>
+                                <td>${item.pay_on_date}</td>
+                                <td>₹${item.amount}</td>
+                                <td><span class="${statusClass}">${item.status}</span></td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    html += `<tr><td colspan="3" style="text-align:center;">No EMI Records</td></tr>`;
+                }
+
+                html += `   </tbody></table></div>`;
+                
+                content.innerHTML = html;
+
+            } catch (error) {
+                console.error(error);
+                content.innerHTML = `
+                    <div style="text-align:center; color:#ef4444; padding:20px;">
+                        <h3>❌ Error</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // --- 2. MODAL & FILTER LOGIC ---
+        window.closeModal = function() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+        window.onclick = function(event) {
+            const modal = document.getElementById('infoModal');
+            if (event.target == modal) modal.style.display = "none";
+        }
+
         window.setFilter = function(status, btnElement) {
             window.currentStatusFilter = status;
-            let buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
             applyFilters();
         }
 
-        // FILTER LOGIC
         window.applyFilters = function() {
-            var input, filterText, table, tr, tdId, i, txtValue;
-            input = document.getElementById("searchInput");
-            filterText = input.value.toUpperCase();
-            table = document.getElementById("deviceTable");
-            tr = table.getElementsByTagName("tr");
+            var input = document.getElementById("searchInput");
+            var filterText = input.value.toUpperCase();
+            var tr = document.getElementById("deviceTable").getElementsByTagName("tr");
 
-            for (i = 0; i < tr.length; i++) {
-                tdId = tr[i].getElementsByTagName("td")[0];
+            for (var i = 0; i < tr.length; i++) {
+                var tdId = tr[i].getElementsByTagName("td")[0];
                 if (tdId) {
-                    txtValue = tdId.textContent || tdId.innerText;
-                    let textMatch = txtValue.toUpperCase().indexOf(filterText) > -1;
-                    let rowStatus = tr[i].getAttribute('data-status'); 
-                    let statusMatch = (window.currentStatusFilter === 'all') || (window.currentStatusFilter === rowStatus);
+                    var txtValue = tdId.textContent || tdId.innerText;
+                    var textMatch = txtValue.toUpperCase().indexOf(filterText) > -1;
+                    var rowStatus = tr[i].getAttribute('data-status'); 
+                    var statusMatch = (window.currentStatusFilter === 'all') || (window.currentStatusFilter === rowStatus);
 
-                    if (textMatch && statusMatch) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
+                    if (textMatch && statusMatch) tr[i].style.display = "";
+                    else tr[i].style.display = "none";
                 }
             }
         }
 
-        // TOGGLE STATUS
+        // --- 3. LOCK/UNLOCK ACTIONS (RENAMED) ---
         window.toggleStatus = function(deviceId, currentStatus) {
             const newStatus = !currentStatus; 
-            const actionName = newStatus ? "LOCK 🔒" : "UNLOCK 🔓";
             
-            if(confirm(`Confirm Action: ${actionName} for Device ${deviceId}?`)) {
-                const deviceRef = ref(db, DB_PATH_NAME + '/' + deviceId);
-                update(deviceRef, {
-                    isActiveRestriction: newStatus
-                }).catch((error) => {
-                    alert("Error: " + error.message);
-                });
+            // ✅ RENAMED ALERT TEXT
+            const actionName = newStatus ? "Activate-Restriction 🔒" : "Deactivate-Restriction 🔓";
+            
+            if(confirm(`Confirm: ${actionName} for Device ${deviceId}?`)) {
+                update(ref(db, DB_PATH_NAME + '/' + deviceId), { isActiveRestriction: newStatus })
+                .catch((e) => alert(e.message));
             }
         };
 
-        // MONITOR DATA
+        // --- 4. FIREBASE REALTIME MONITOR ---
         function startMonitor() {
-            const devicesRef = ref(db, DB_PATH_NAME);
-
-            onValue(devicesRef, (snapshot) => {
+            onValue(ref(db, DB_PATH_NAME), (snapshot) => {
                 if (snapshot.exists()) {
-                    let total = 0;
-                    let locked = 0;
-                    let unlocked = 0;
-                    let htmlCode = "";
-
-                    snapshot.forEach((childSnapshot) => {
+                    let total = 0, locked = 0, unlocked = 0, htmlCode = "";
+                    snapshot.forEach((child) => {
                         total++;
-                        const userId = childSnapshot.key;
-                        const data = childSnapshot.val();
+                        const userId = child.key;
+                        const data = child.val();
                         const isRestricted = data.isActiveRestriction === true; 
-
+                        
                         if (isRestricted) locked++; else unlocked++;
 
-                        // Modern Badge Logic
+                        // ✅ RENAMED STATUS & BUTTONS
                         const badgeClass = isRestricted ? "badge-locked" : "badge-open";
-                        const badgeText = isRestricted ? "LOCKED" : "ACTIVE";
+                        const badgeText = isRestricted ? "RESTRICTED" : "ACTIVE"; // "LOCKED" -> "RESTRICTED"
                         
-                        // Modern Button Logic
                         const btnClass = isRestricted ? "btn-unlock" : "btn-lock";
-                        const btnIcon = isRestricted ? "🔓" : "🛡️";
-                        const btnText = isRestricted ? "Unlock Device" : "Lock Device";
-                        
+                        // "Unlock" -> "Deactivate-Restriction" | "Lock" -> "Activate-Restriction"
+                        const btnText = isRestricted ? "Deactivate-Restriction" : "Activate-Restriction";
                         const statusTag = isRestricted ? "locked" : "active";
 
                         htmlCode += `
                             <tr data-status="${statusTag}">
                                 <td>
                                     <div style="font-weight:600; color:#fff; font-size:1.1rem;">${userId}</div>
-                                    <div style="font-size:0.8rem; color:#64748b;">Android ID</div>
                                 </td>
                                 <td>
-                                    <span class="badge ${badgeClass}">
-                                        <div class="dot"></div> ${badgeText}
-                                    </span>
+                                    <span class="badge ${badgeClass}"><div class="dot"></div> ${badgeText}</span>
                                 </td>
                                 <td>
+                                    <button class="btn btn-info" onclick="window.fetchUserInfo('${userId}')">
+                                        👁️ Info
+                                    </button>
                                     <button class="btn ${btnClass}" onclick="window.toggleStatus('${userId}', ${isRestricted})">
-                                        ${btnIcon} ${btnText}
+                                        ${isRestricted ? '🔓' : '🛡️'} ${btnText}
                                     </button>
                                 </td>
                             </tr>
                         `;
                     });
-
                     document.getElementById("totalCount").innerText = total;
                     document.getElementById("lockedCount").innerText = locked;
                     document.getElementById("unlockedCount").innerText = unlocked;
                     document.getElementById("userTableBody").innerHTML = htmlCode;
                     applyFilters(); 
-
                 } else {
                     document.getElementById("totalCount").innerText = "0";
-                    document.getElementById("userTableBody").innerHTML = "<tr><td colspan='3' style='text-align:center; padding:30px; color:#94a3b8;'>No Devices Connected</td></tr>";
+                    document.getElementById("userTableBody").innerHTML = "<tr><td colspan='3' style='text-align:center; padding:30px; color:#94a3b8;'>No Devices Found</td></tr>";
                 }
             });
         }
-
         startMonitor();
     </script>
 </body>
