@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "189723068248",
+    "project_id": "startsafe01",
+    "storage_bucket": "startsafe01.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189723068248:android:21f1a83759fb8766f5472d",
+        "android_client_info": {
+          "package_name": "com.payzenpro.distributerretailer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKYmwjNO0C-0SLe3lZhBXwsTmskBv7_pY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
